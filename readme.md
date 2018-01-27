@@ -40,3 +40,11 @@ index cafe674..e69ed8b 100644
 -       DocumentRoot /var/www/html/pub
 +       DocumentRoot /var/www/html
 ```
+Al terminar de hacer estos cambios por favor compilar, modifica el docker-compose.yml por el nombre de tu container.
+
+## Carácteristicas que provee
+Se integran lo siguientes proyectos, los cuales se pueden integrar fácilmente, lo cual se puede hacer un fork, hacer uso de los métodos ya diseñados para agrandar tus Entities de tu base de datos.
+
+		https://github.com/bjyoungblood/BjyAuthorize
+		https://github.com/doctrine/DoctrineORMModule
+			
