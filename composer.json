@@ -1,0 +1,37 @@
+{
+    "name": "zf2authcore",
+    "description": "" ,
+    "license": "BS3-Clausule",
+    "authors": [
+        {
+            "name": "Ricardo Ruiz",
+            "email": "rrcfesc@gmail.com"
+        }
+    ],
+    "require":{
+        "php"   : ">=7.0",
+        "doctrine/doctrine-orm-module"      : "1.*",
+        "zendframework/zendframework"       : "2.*",
+        "phpseclib/phpseclib"               : "2.*",
+        "zf-commons/zfc-user"               : "1.*",
+        "zf-commons/zfc-user-doctrine-orm"  : "1.*",
+        "bjyoungblood/bjy-authorize"        : "1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit"               : "4.*",
+        "php-coveralls/php-coveralls"   : "dev-master",
+        "phpunit/phpcov"                : "2.*",
+        "squizlabs/php_codesniffer"     : "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rioxygen\\Zf2AuthCore\\": "src"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
+            "Rioxygen\\Zf2AuthCore\\" : "tests/"
+        }
+    }
+}
+

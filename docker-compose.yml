@@ -1,0 +1,25 @@
+web:
+    image: macmini:latest
+    ports:
+        - "80:80"
+        - "445:443"
+        - "8116:22"
+    volumes:
+        - ./:/var/www/html
+        - ~/.ssh:/home/magento2/.ssh
+    environment:
+        - WEBSERVER_USER=www-data
+        - MAGENTO_USER=magento2
+        - CURRENT_USER_UID=501
+        - MAGENTO_GROUP=501
+    links:
+        - mysql
+    container_name: rioxygen-zf2auth-web
+mysql:
+    image: mysql:5.7
+    ports:
+      - 3333:3306
+    environment:
+        - MYSQL_ROOT_PASSWORD=mysql
+        - MYSQL_DATABASE=zf2auth
+    container_name: rioxygen-zf2auth-db
