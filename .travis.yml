@@ -7,3 +7,11 @@ php:
 before_script:
   - composer self-update
   - composer install --dev
+mysql:
+  database: zf2auth
+  username: root
+  encoding: utf8
+before_install:
+  - mysql -e 'drop database if exists zf2auth;'
+  - mysql -e 'create database if not exists zf2auth;'
+  - mysql -e 'show databases;'
