@@ -1,4 +1,5 @@
 create database if not exists zf2auth;
+use zf2auth;
 drop table if exists users;
 create table if not exists users (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'User Id',
