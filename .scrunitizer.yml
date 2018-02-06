@@ -1,16 +1,12 @@
 imports:
   - php
-
 before_commands:
   - "composer install --dev"
-
 tools:
   external_code_coverage: false
-
 tools:
     php_cs_fixer:
         config: { level: psr4 }
-        
 checks:
     php: 
         verify_property_names: true
