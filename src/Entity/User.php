@@ -73,7 +73,6 @@ class User implements UserInterface, ProviderInterface
      * )
      */
     protected $roles;
-    
     /**
      * Initialies the roles variable.
      */
