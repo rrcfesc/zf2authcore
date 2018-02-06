@@ -13,12 +13,10 @@ mysql:
 script:
   - php vendor/bin/phpunit -c phpunit.xml  
 after_success:
-  - travis_retry php vendor/bin/coveralls
+  - travis_retry php vendor/bin/php-coveralls
   # or enable logging
-  - travis_retry php vendor/bin/coveralls -v
+  - travis_retry php vendor/bin/php-coveralls -v
 before_install:
-  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('mysql') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
-  - sudo service mysql restart
   - mysql -e 'drop database if exists zf2auth;'
   - mysql -e 'create database if not exists zf2auth;'
   - mysql -e 'show databases;'
