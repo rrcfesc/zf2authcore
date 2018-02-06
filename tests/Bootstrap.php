@@ -4,7 +4,6 @@
  * @license  BS3-Clausule
  * @author Ricardo Ruiz <rrcfesc@gmail.com>
  */
-namespace Rioxygen\Zf2AuthCore;
 
 /**
  * Class to bootstrap the application
@@ -22,7 +21,7 @@ class Bootstrap
         require_once( __DIR__ . '/../vendor/autoload.php' );
     }
     /**
-     * Get Confi Default for test
+     * Get Config Default for test
      * @return array
      */
     static public function getConfig() : array

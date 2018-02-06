@@ -30,7 +30,7 @@
     },
     "autoload-dev" : {
         "psr-4" : {
-            "Rioxygen\\Zf2AuthCore\\" : "tests/"
+            "Rioxygen\\Zf2AuthCore\\" : "tests/src"
         }
     }
 }

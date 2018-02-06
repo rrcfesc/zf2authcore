@@ -4,6 +4,7 @@ web:
         - "80:80"
         - "445:443"
         - "8116:22"
+        - "9000:9000"
     volumes:
         - ./:/var/www/html
         - ~/.ssh:/home/magento2/.ssh
