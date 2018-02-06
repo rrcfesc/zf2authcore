@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/rrcfesc/zf2authcore.svg?branch=master)](https://travis-ci.org/rrcfesc/zf2authcore)
+[![Coverage Status](https://coveralls.io/repos/github/rrcfesc/zf2authcore/badge.svg?branch=master)](https://coveralls.io/github/rrcfesc/zf2authcore?branch=master)
 # Core base
 Esta libreria proveé, todos los métodos para hacer TDD, haciendo uso de una capa de abstracción en la cual se usa una capa donde está el mapeado de la base de datos, en otro el DAO y la tercera capa el uso de una capa llamada SERVICE.
 
