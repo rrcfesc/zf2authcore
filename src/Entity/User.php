@@ -4,13 +4,14 @@
  * @license  BS3-Clausule
  * @author Ricardo Ruiz <rrcfesc@gmail.com>
  */
-namespace Rioxygen\Zf2AuthCore;
+namespace Rioxygen\Zf2AuthCore\Entity;
 
 use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ZfcUser\Entity\UserInterface;
+use \DateTime;
 
 /**
  * An example of how to implement a role aware user entity.
@@ -175,6 +176,38 @@ class User implements UserInterface, ProviderInterface
     public function setState($state)
     {
         $this->state = $state;
+    }
+    /**
+     * <p>eturn DateTime user Created</p>
+     * @return DateTime
+     */
+    public function getCreate() : DateTime
+    {
+        return $this->create;
+    }
+    /**
+     * <p>Return DateTime user updated</p>
+     * @return DateTime
+     */
+    public function getUpdated() : DateTime
+    {
+        return $this->updated;
+    }
+    /**
+     * <p>Set Created at</p>
+     * @param DateTime $create
+     */
+    public function setCreate(DateTime $create)
+    {
+        $this->create = $create;
+    }
+    /**
+     * <p>Update DateTime user modified</p>
+     * @param DateTime $updated
+     */
+    public function setUpdated(DateTime $updated)
+    {
+        $this->updated = $updated;
     }
     /**
      * Get role.
