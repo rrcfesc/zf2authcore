@@ -11,7 +11,11 @@ mysql:
   username: root
   encoding: utf8
 script:
-  - php vendor/bin/phpunit -c phpunit.xml
+  - php vendor/bin/phpunit -c phpunit.xml  
+after_success:
+  - travis_retry php vendor/bin/coveralls
+  # or enable logging
+  - travis_retry php vendor/bin/coveralls -v
 before_install:
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('mysql') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - sudo service mysql restart
