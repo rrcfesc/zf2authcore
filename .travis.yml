@@ -16,7 +16,7 @@ after_script:
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 after_success:
   - travis_retry php vendor/bin/php-coveralls -vb
-efore_install:
+before_install:
   - mysql -e 'drop database if exists zf2auth;'
   - mysql -e 'create database if not exists zf2auth;'
   - mysql -e 'show databases;'
