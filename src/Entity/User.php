@@ -30,7 +30,7 @@ class User implements UserInterface, ProviderInterface
     protected $id;
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @ORM\Column(type="string", length=75, unique=true, nullable=true)
      */
     protected $username;
     /**
@@ -40,7 +40,7 @@ class User implements UserInterface, ProviderInterface
     protected $email;
     /**
      * @var string
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=75, nullable=true)
      */
     protected $displayName;
     /**
@@ -53,6 +53,16 @@ class User implements UserInterface, ProviderInterface
      * @ORM\Column(type="integer")
      */
     protected $state;
+    /**
+     * @var string
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    protected $create;
+    /**
+     * @var string
+     * @ORM\Column(name="updated", type="datetime", nullable=false)
+     */
+    protected $updated;
     /**
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\ManyToMany(targetEntity="Rioxygen\Zf2AuthCore\Entity\Role")
