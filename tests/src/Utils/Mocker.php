@@ -7,10 +7,10 @@
 namespace Rioxygen\Zf2AuthCore\Utils;
 
 use \PHPUnit_Framework_TestCase;
-use Psr\Log\AbstractLogger;
 
 /**
  * <p>Class to extract mocker</p>
+ * @version 1.0
  */
 class Mocker extends PHPUnit_Framework_TestCase
 {

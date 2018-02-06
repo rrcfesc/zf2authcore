@@ -31,7 +31,7 @@ class Role implements RoleInterface
     protected $roleName;
     /**
      * @var Role
-     * @ORM\ManyToOne(targetEntity="Rioxygen\Zf2AuthCore\EntityRole")
+     * @ORM\ManyToOne(targetEntity="Rioxygen\Zf2AuthCore\Entity\Role")
      */
     protected $parent;
     /**

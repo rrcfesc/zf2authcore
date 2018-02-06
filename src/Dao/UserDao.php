@@ -47,7 +47,7 @@ class UserDao
      * @param User $user
      * @return int
      */
-    public function createUser(User $user) : int
+    public function createUser(User $user) : bool
     {
         $control = array(1);
         try {
@@ -58,7 +58,8 @@ class UserDao
             $this->logger->error($ex->getMessage());
             $control[] = false;
         }
-        return (!in_array(0, $control));
+        $respuesta = (bool)(!in_array(0, $control));
+        return $respuesta;
     }
     /**
      * Get allUsers
@@ -66,10 +67,8 @@ class UserDao
      */
     public function getAll() : ArrayCollection
     {
-        $respuesta = $this->repository->findAll();
-        if (is_array($respuesta)) {
-            $respuesta = new ArrayCollection();
-        }
+        $resp       = $this->repository->findAll();
+        $respuesta  = new ArrayCollection($resp);
         return $respuesta;
     }
 }

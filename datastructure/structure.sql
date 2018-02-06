@@ -34,6 +34,6 @@ CREATE TABLE if not exists `users_roles` (
     ON UPDATE CASCADE,
   CONSTRAINT `roleIdFK`
     FOREIGN KEY (`roleId`)
-    REFERENCES `users` (`id`)
+    REFERENCES `role` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
