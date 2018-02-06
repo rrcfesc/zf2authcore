@@ -2,7 +2,6 @@ language: php
 php:
   - '7.0'
   - '7.1'
-  - '7.2'
 before_script:
   - composer self-update
   - composer install --dev
@@ -16,10 +15,8 @@ after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 after_success:
-  - travis_retry php vendor/bin/php-coveralls
-  # or enable logging
-  - travis_retry php vendor/bin/php-coveralls -v
-before_install:
+  - travis_retry php vendor/bin/php-coveralls -vb
+efore_install:
   - mysql -e 'drop database if exists zf2auth;'
   - mysql -e 'create database if not exists zf2auth;'
   - mysql -e 'show databases;'
