@@ -8,7 +8,7 @@ return array(
     'db' =>  array(
         'dbname' => 'zf2auth',
         'user' => 'root',
-        'password' => 'mysql',
+        'password' => '',
         'host' => '127.0.0.1',
         'driver' => 'pdo_mysql', 
     ),
