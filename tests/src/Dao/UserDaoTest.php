@@ -85,12 +85,87 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
             $user->setUsername("kasparov");
             $user->setPassword("unam2010");
             $user->setState(1);
-            $user->getEmail("rrcfesc@gmail.com");
+            $user->setEmail("rrcfesc@gmail.com");
         $info               = $userDao->createUser($user);
         $this->assertTrue($info);
+        $this->assertUser($user);
         $this->assertTrue(!is_null($user->getId()));
         $totalUsuarios      = $userDao->getAll();
-        $this->assertTrue((1 === $totalUsuarios->count()));
+        $this->assertTrue((1 === count($totalUsuarios)));
+        return $user;
+    }
+    /**
+     * 
+     * @depends testNewUsers
+     */
+    public function testDeleteUser($user)
+    {
+        $userDao            = new UserDao($this->em, $this->logger);
+        $userDao->deleteUser($user);
+        $totalUsuarios      = $userDao->getAll();
+        $this->assertTrue((0 === $totalUsuarios->count()));
+    }
+    /**
+     * Create new User
+     */
+    public function testNewUsersSearch()
+    {
+        $create             = new DateTime("NOW");
+        $userDao            = new UserDao($this->em, $this->logger);
+        $user               = new User();
+            $user->setCreate($create);
+            $user->setUpdated($create);
+            $user->setDisplayName("Ricardo Ruiz");
+            $user->setUsername("kasparov");
+            $user->setPassword("unam2010");
+            $user->setState(1);
+            $user->setEmail("rrcfesc@gmail.com");
+        $info               = $userDao->createUser($user);
+        $this->assertTrue($info);
+        $this->assertUser($user);
+        $this->assertTrue(!is_null($user->getId()));
+        $totalUsuarios      = $userDao->getAll();
+        $this->assertTrue((1 === count($totalUsuarios)));
+        return $user;
+    }
+    /**
+     * @depends testNewUsersSearch
+     */
+    public function testUserGetById(User $user)
+    {
+        $create             = new DateTime("NOW");
+        $userDao            = new UserDao($this->em, $this->logger);
+        $userCreate         = new User();
+            $userCreate->setCreate($create);
+            $userCreate->setUpdated($create);
+            $userCreate->setDisplayName("Ricardo Ruiz");
+            $userCreate->setUsername("kasparov");
+            $userCreate->setPassword("unam2010");
+            $userCreate->setState(1);
+            $userCreate->setEmail("rrcfesc@gmail.com");
+        $info               = $userDao->createUser($userCreate);
+        $this->assertTrue($info);
+        $this->assertUser($userCreate);
+        $userSearch         = $userDao->getById($user->getId());
+        $this->assertEquals($userSearch->getId(), $user->getId());
+        return $user;
+    }
+    /**
+     * AssertInfoUser
+     * @param User $user
+     */
+    public function assertUser(User $user)
+    {
+        $this->assertNotNull($user->getId());
+        $this->assertNotNull($user->getCreate());
+        $this->assertNotNull($user->getDisplayName());
+        $this->assertNotNull($user->getState());
+        $this->assertNotNull($user->getUpdated());
+        $this->assertNotNull($user->getPassword());
+        $this->assertNotNull($user->getRoles());
+        $this->assertNotNull($user->getArrayCopy());
+        $this->assertNotNull($user->getUsername());
+        $this->assertNotNull($user->getEmail());
     }
     /**
      * Truncate Table

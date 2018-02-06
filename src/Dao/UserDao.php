@@ -10,7 +10,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Repository\RepositoryFactory;
 use Rioxygen\Zf2AuthCore\Entity\User;
 use Psr\Log\LoggerInterface;
-use Doctrine\Common\Collections\ArrayCollection;
+#use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use \Exception;
 
 /**
@@ -40,7 +41,7 @@ class UserDao
     {
         $this->em           = $em;
         $this->logger       = $logger;
-        $this->repository   = $this->em->getRepository('Rioxygen\Zf2AuthCore\Entity\User');
+        $this->repository   = $this->em->getRepository('\Rioxygen\Zf2AuthCore\Entity\User');
     }
     /**
      * Determinate if we can create or update User
@@ -49,7 +50,7 @@ class UserDao
      */
     public function createUser(User $user) : bool
     {
-        $control = array(1);
+        $control = array(true);
         try {
             $this->em->persist($user);
             $this->em->flush();
@@ -62,13 +63,47 @@ class UserDao
         return $respuesta;
     }
     /**
-     * Get allUsers
-     * @return ArrayCollection
+     * DeleteUser Logical
+     * @param User $user
+     * @return bool
      */
-    public function getAll() : ArrayCollection
+    public function deleteUser(User $user) : bool
     {
-        $resp       = $this->repository->findAll();
-        $respuesta  = new ArrayCollection($resp);
+        $control = array(1);
+        try {
+            $user->setState(0);
+            $this->em->persist($user);
+            $this->em->flush();
+            $control[] = true;
+        } catch (Exception $ex) {
+            $this->logger->error($ex->getMessage());
+            $control[] = false;
+        }
+        $respuesta = (bool)(!in_array(0, $control));
+        return $respuesta;
+    }
+    /**
+     * Get By User Id
+     * @param string $id
+     */
+    public function getById(string $id) : User
+    {
+        $user       = $this->repository->findOneBy(array('id'=>$id));
+        if (!($user instanceof  User)) {
+            $user =  new User();
+        }
+        return $user;
+    }
+    /**
+     * Get All User 
+     * @param int $page
+     * @param int $items
+     * @param boolean $state
+     * @return Paginator
+     */
+    public function getAll($page = 0, $items = 100, $state = 1) : Paginator
+    {
+        $respuesta = $this->repository->getAllUsers($page = 1, $items = 100, $state = 1);
         return $respuesta;
     }
 }

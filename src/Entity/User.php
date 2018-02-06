@@ -18,6 +18,7 @@ use \DateTime;
  *
  * @ORM\Entity
  * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="Rioxygen\Zf2AuthCore\Repository\UserRepository")
  * @author Tom Oram <tom@scl.co.uk>
  */
 class User implements UserInterface, ProviderInterface
@@ -79,6 +80,7 @@ class User implements UserInterface, ProviderInterface
     public function __construct()
     {
         $this->roles        = new ArrayCollection();
+        $this->state        = 0;
     }
     /**
      * Get id.
