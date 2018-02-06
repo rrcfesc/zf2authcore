@@ -16,4 +16,4 @@ before_install:
   - mysql -e 'drop database if exists zf2auth;'
   - mysql -e 'create database if not exists zf2auth;'
   - mysql -e 'show databases;'
-  - mysql -e | cat datastructure/structure.sql
+  - mysql < datastructure/structure.sql
