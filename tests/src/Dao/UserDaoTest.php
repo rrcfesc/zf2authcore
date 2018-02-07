@@ -10,8 +10,11 @@ use \PHPUnit_Framework_TestCase;
 use Rioxygen\Zf2AuthCore\Utils\Database;
 use Rioxygen\Zf2AuthCore\Utils\Mocker;
 use Rioxygen\Zf2AuthCore\Dao\UserDao;
+use Rioxygen\Zf2AuthCore\Dao\RoleDao;
 use Rioxygen\Zf2AuthCore\Entity\User;
+use Rioxygen\Zf2AuthCore\Entity\Role;
 use Rioxygen\Zf2AuthCore\Utils\UserTruncate;
+use Rioxygen\Zf2AuthCore\Utils\RoleTruncate;
 use Zend\Log\Logger;
 use \DateTime;
 use \Bootstrap;
@@ -35,20 +38,26 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
      */
     private $truncate;
     /**
+     *
+     * @var RoleTruncate
+     */
+    private $roleTruncate;
+    /**
      * Initial Setup
      */
     public function setUp()
     {
-        $config     = Bootstrap::getConfig();
-        $mocker     = new Mocker();
-        $this->truncate = new UserTruncate();
-        $objDB      = new Database($config['db']['host'], 
+        $config                 = Bootstrap::getConfig();
+        $mocker                 = new Mocker();
+        $this->truncate         = new UserTruncate();
+        $this->roleTruncate     = new RoleTruncate();
+        $objDB                  = new Database($config['db']['host'], 
                 $config['db']['dbname'], 
                 $config['db']['user'], 
                 $config['db']['password']);
-        $this->pdo  = $objDB->getConnection();
-        $this->em   = $objDB->getEntityManager(array('src/Entity'),$config['db']);
-        $this->logger= $mocker->getLoggerMock();
+        $this->pdo              = $objDB->getConnection();
+        $this->em               = $objDB->getEntityManager(array('src/Entity'),$config['db']);
+        $this->logger           = $mocker->getLoggerMock();
     }
     /**
      * Get TotalCurrentUsers
@@ -162,6 +171,41 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
         $userSearch         = $userDao->getById(10000);
         $this->assertTrue((is_null($userSearch->getId())));
     }
+    
+    /**
+     * Create new User With Role
+     */
+    public function testNewUsersRole()
+    {
+        $roleDao            = new RoleDao($this->em, $this->logger);
+        $userDao            = new UserDao($this->em, $this->logger);
+        $create             = new DateTime("NOW");
+        $user               = new User();
+            $user->setCreate($create);
+            $user->setUpdated($create);
+            $user->setDisplayName("Ricardo Ruiz");
+            $user->setUsername("kasparov");
+            $user->setPassword("unam2010");
+            $user->setState(1);
+            $user->setEmail("rrcfesc@gmail.com");
+        $infoU              = $userDao->createUser($user);
+        $role               = new Role();
+            $role->setState(1);
+            $role->setRoleId("Test");
+            $role->setId(10);
+        $infoR              = $roleDao->createRole($role);
+        $this->assertTrue($infoU);
+        $this->assertTrue($infoR);
+        $user->addRole($role);
+        $userDao->createUser($user);
+        $this->assertUser($user);
+        $this->assertUserRoles($user, 1);
+        $user->removeRole($role);
+        $userDao->createUser($user);
+        $this->assertUserRoles($user, 0);
+    }
+    
+    
     /**
      * AssertInfoUser
      * @param User $user
@@ -180,12 +224,23 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($user->getEmail());
     }
     /**
+     * Evaluate how many Role has the user
+     * @param User $user
+     * @param Integer $amount
+     */
+    public function assertUserRoles(User $user, $amount = 1)
+    {
+        $roles = $user->getRoles();
+        $this->assertCount($amount, $roles);
+    }
+    /**
      * Truncate Table
      */
     public function tearDown()
     {
         $this->pdo->exec($this->truncate->unChainFk());
         $this->pdo->exec($this->truncate->userTable());
+        $this->pdo->exec($this->roleTruncate->roleTable());
         $this->pdo->exec($this->truncate->chainFk());
     }
 }

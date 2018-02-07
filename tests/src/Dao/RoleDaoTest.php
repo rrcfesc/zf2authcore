@@ -84,6 +84,22 @@ class RoleDaoTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($info);
     }
     /**
+     * TestCreateRole
+     */
+    public function testCreateDeleteRoleNew()
+    {
+        $roleDao            = new RoleDao($this->em, $this->logger);
+        $role               = new Role();
+            $role->setState(1);
+            $role->setRoleId("Test");
+            $role->setId(10);
+        $info               = $roleDao->createRole($role);
+        $this->evaluteRole($role);
+        $this->assertTrue($info);
+        $delinfo            = $roleDao->deleteRole($role);
+        $this->assertTrue($delinfo);
+    }
+    /**
      * Evaluete Role
      * @param Role $role
      */

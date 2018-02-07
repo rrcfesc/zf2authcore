@@ -72,10 +72,7 @@ class Role implements RoleInterface
     }
     /**
      * Set the role id.
-     *
      * @param string $roleId
-     *
-     * @return void
      */
     public function setRoleId($roleId)
     {
@@ -94,8 +91,6 @@ class Role implements RoleInterface
      * Set the parent role.
      *
      * @param Role $parent
-     *
-     * @return void
      */
     public function setParent(Role $parent)
     {
