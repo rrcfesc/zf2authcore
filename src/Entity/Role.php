@@ -13,6 +13,7 @@ use Zend\Permissions\Acl\Role\RoleInterface;
  * An example entity that represents a role.
  * @ORM\Entity
  * @ORM\Table(name="role")
+ * @ORM\Entity(repositoryClass="Rioxygen\Zf2AuthCore\Repository\RoleRepository")
  * @author Tom Oram <tom@scl.co.uk>
  */
 class Role implements RoleInterface
@@ -28,12 +29,18 @@ class Role implements RoleInterface
      * @var string
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      */
-    protected $roleName;
+    protected $roleId;
     /**
      * @var Role
+     * @ORM\Column(name="parent", type="integer", nullable=true)
      * @ORM\ManyToOne(targetEntity="Rioxygen\Zf2AuthCore\Entity\Role")
      */
     protected $parent;
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    protected $state;
     /**
      * Get the id.
      *
@@ -93,5 +100,21 @@ class Role implements RoleInterface
     public function setParent(Role $parent)
     {
         $this->parent = $parent;
+    }
+    /**
+     * Get state.
+     * @return int
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+    /**
+     * Set state.
+     * @param int $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
     }
 }

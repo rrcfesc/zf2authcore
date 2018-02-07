@@ -10,26 +10,26 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
- * Entity Extends
+ * RoleRepository Extends
  * @version 1.0
  */
-class UserRepository extends EntityRepository
+class RoleRepository extends EntityRepository
 {
     /**
-     * Get all User with filter active/inactive
+     * Get all Role with filter active/inactive
      * @param integer $page
      * @param integer $items
      * @param boolean $state
      * @return Paginator
      */
-    public function getAllUsers($page = 1, $items = 100, $state = 1) : Paginator
+    public function getAllRoles($page = 1, $items = 100, $state = 1) : Paginator
     {
         $offset = $page * $items;
         $qb = $this->_em->createQueryBuilder();
-        $qb->select("u")
-            ->from("Rioxygen\Zf2AuthCore\Entity\User", "u")
-            ->where($qb->expr()->in("u.state", $state))
-            ->orderBy('u.id', 'DESC')
+        $qb->select("r")
+            ->from("Rioxygen\Zf2AuthCore\Entity\Role", "r")
+            ->where($qb->expr()->in("r.state", $state))
+            ->orderBy('r.id', 'DESC')
             ->setFirstResult($offset)
             ->setMaxResults($items);
         $paginator          = new Paginator($qb);

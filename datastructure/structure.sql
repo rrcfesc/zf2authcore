@@ -1,3 +1,4 @@
+drop database if exists zf2auth;
 create database if not exists zf2auth;
 use zf2auth;
 drop table if exists users_roles;
@@ -15,11 +16,12 @@ create table if not exists users (
 
 create table if not exists role (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Role Id',
-    roleName varchar(75) COMMENT '',
+    roleId varchar(255) NOT NULL COMMENT '',
     parent int null,
+    state tinyint,
     FOREIGN KEY (parent)
-	REFERENCES role(id)
-	ON UPDATE CASCADE ON DELETE CASCADE
+        REFERENCES role(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE InnoDB;
 
 CREATE TABLE if not exists `users_roles` (

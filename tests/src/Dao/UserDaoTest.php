@@ -136,6 +136,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
         $create             = new DateTime("NOW");
         $userDao            = new UserDao($this->em, $this->logger);
         $userCreate         = new User();
+            $userCreate->setId(100);
             $userCreate->setCreate($create);
             $userCreate->setUpdated($create);
             $userCreate->setDisplayName("Ricardo Ruiz");
@@ -149,6 +150,17 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
         $userSearch         = $userDao->getById($user->getId());
         $this->assertEquals($userSearch->getId(), $user->getId());
         return $user;
+    }
+    /**
+     * 
+     * @param User $user
+     */
+    public function testUserGetByIdNF()
+    {
+        //$create             = new DateTime("NOW");
+        $userDao            = new UserDao($this->em, $this->logger);
+        $userSearch         = $userDao->getById(10000);
+        $this->assertTrue((is_null($userSearch->getId())));
     }
     /**
      * AssertInfoUser
