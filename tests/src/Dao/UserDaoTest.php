@@ -204,8 +204,16 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
         $userDao->createUser($user);
         $this->assertUserRoles($user, 0);
     }
-    
-    
+    /**
+     * Test Fail Delete User
+     */
+    public function testDeleteFailUser()
+    {
+        $userDao            = new UserDao($this->em, $this->logger);
+        $user               = new User();
+        $info               = $userDao->deleteUser($user);
+        $this->assertTrue(!$info);
+    }
     /**
      * AssertInfoUser
      * @param User $user

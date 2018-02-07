@@ -238,22 +238,22 @@ class User implements UserInterface, ProviderInterface
      * Add roles to the user.
      * @param Collection $roles
      */
-    public function addRoles(Collection $roles)
+    /*public function addRoles(Collection $roles)
     {
         foreach ($roles as $role) {
             $this->roles->add($role);
         }
-    }
+    }*/
     /**
      * Remove roles from the user.
      * @param Collection $roles
      */
-    public function removeRoles(Collection $roles)
+    /*public function removeRoles(Collection $roles)
     {
         foreach ($roles as $role) {
             $this->roles->removeElement($role);
         }
-    }
+    }*/
     /**
      * Regresa la informacion del Objeto
      * @return array

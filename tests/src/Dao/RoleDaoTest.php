@@ -100,7 +100,7 @@ class RoleDaoTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($delinfo);
     }
     /**
-     * TestCreateRole
+     * TestCreateRole DeleteRole
      */
     public function testCreateRoleParent()
     {
@@ -120,6 +120,33 @@ class RoleDaoTest extends PHPUnit_Framework_TestCase
         $infoR2              = $roleDao->createRole($role2);
         $this->evaluteRole($role, true);
         $this->assertTrue($infoR2);
+        $infoDel = $roleDao->deleteRole($role2);
+        $this->assertTrue($infoDel);
+    }
+    /**
+     * TestCreateRole DeleteRole
+     */
+    public function testCreateRoleFail()
+    {
+        $roleDao            = new RoleDao($this->em, $this->logger);
+        $role               = new Role();
+            #$role->setState(1);
+            #$role->setRoleId("Test");
+            #$role->setId(10);
+//        $info               = $roleDao->createRole($role);
+//        $this->evaluteRole($role);
+//        $this->assertTrue($info);
+//        $role2               = new Role();
+//            $role2->setState(1);
+//            $role2->setRoleId("Test");
+//            $role2->setId(10);
+//            $role->setParent($role->getId());
+//        $infoR2              = $roleDao->createRole($role2);
+//        $role2->setId(5000);
+//        $this->evaluteRole($role, true);
+        #$this->assertTrue($infoR2);
+        $infoDel = $roleDao->deleteRole($role);
+        $this->assertTrue(!$infoDel);
     }
     /**
      * Evaluete Role
