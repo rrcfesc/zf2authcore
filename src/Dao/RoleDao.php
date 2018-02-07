@@ -56,6 +56,7 @@ class RoleDao
             $this->em->flush();
             $control[] = true;
         } catch (Exception $ex) {
+            var_dump($ex->getMessage());
             $this->logger->error($ex->getMessage());
             $control[] = false;
         }

@@ -32,7 +32,7 @@ class Role implements RoleInterface
     protected $roleId;
     /**
      * @var Role
-     * @ORM\Column(name="parent", type="integer", nullable=true)
+     * @ORM\Column(name="parent")
      * @ORM\ManyToOne(targetEntity="Rioxygen\Zf2AuthCore\Entity\Role")
      */
     protected $parent;
@@ -90,9 +90,9 @@ class Role implements RoleInterface
     /**
      * Set the parent role.
      *
-     * @param Role $parent
+     * @param string $parent
      */
-    public function setParent(Role $parent)
+    public function setParent($parent)
     {
         $this->parent = $parent;
     }
