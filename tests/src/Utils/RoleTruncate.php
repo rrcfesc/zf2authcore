@@ -13,7 +13,7 @@ namespace Rioxygen\Zf2AuthCore\Utils;
 class RoleTruncate extends BaseTruncate
 {
     /**
-     * Return table Role
+     * Truncate query  table  Role
      * @return string
      */
     public function roleTable() : string

@@ -1,8 +1,12 @@
 drop database if exists zf2auth;
 create database if not exists zf2auth;
 use zf2auth;
+drop table if exists controllerguard_role_relation;
 drop table if exists users_roles;
 drop table if exists users;
+drop table if exists acl_controllerguard;
+drop table if exists role;
+
 create table if not exists users (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'User Id',
     username varchar(75) COMMENT 'UserName of the customer',
@@ -38,4 +42,28 @@ CREATE TABLE if not exists `users_roles` (
     FOREIGN KEY (`roleId`)
     REFERENCES `role` (`id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE);
+    ON UPDATE CASCADE
+) ENGINE InnoDB;
+
+create table if not exists acl_controllerguard(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identifier',
+    controller varchar(255) COMMENT 'NameSpace of the controller',
+    action varchar(255) COMMENT 'NameSpace of the controller'
+) ENGINE InnoDB;
+
+create table if not exists controllerguard_role_relation (
+    controllerguardId int,
+    roleId int,
+    INDEX `controllerguardIdFK_idx` (`controllerguardId` ASC),
+    INDEX `roleIdCRRFK_idx` (`roleId` ASC),
+    CONSTRAINT `controllerguardIdFK`
+        FOREIGN KEY (`controllerguardId`)
+        REFERENCES `acl_controllerguard` (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+  CONSTRAINT `roleIdCRRFK`
+        FOREIGN KEY (`roleId`)
+        REFERENCES `role` (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+) ENGINE InnoDB;
