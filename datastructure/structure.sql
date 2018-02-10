@@ -6,6 +6,9 @@ drop table if exists users_roles;
 drop table if exists users;
 drop table if exists acl_controllerguard;
 drop table if exists role;
+drop table if exists acl_resource;
+drop table if exists acl_rule;
+
 
 create table if not exists users (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'User Id',
@@ -53,7 +56,7 @@ create table if not exists acl_controllerguard(
 
 create table if not exists controllerguard_role_relation (
     controllerguardId int,
-    roleId int,
+    roleId INT NOT NULL,
     INDEX `controllerguardIdFK_idx` (`controllerguardId` ASC),
     INDEX `roleIdCRRFK_idx` (`roleId` ASC),
     CONSTRAINT `controllerguardIdFK`
@@ -61,9 +64,33 @@ create table if not exists controllerguard_role_relation (
         REFERENCES `acl_controllerguard` (`id`)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-  CONSTRAINT `roleIdCRRFK`
+    CONSTRAINT `roleIdCRRFK`
         FOREIGN KEY (`roleId`)
         REFERENCES `role` (`id`)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 ) ENGINE InnoDB;
+
+create table if not exists acl_resource (
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identifier',
+    name varchar(255) NOT NULL COMMENT '',
+    description varchar(255) NOT NULL COMMENT ''
+) ENGINE InnoDB;
+
+create table if not exists acl_rule (
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identifier',
+    resourceId INT NOT NULL,
+    roleId INT NOT NULL,
+    privilege varchar(255) NOT NULL COMMENT '',
+    CONSTRAINT `RoleIdACLRulFK`
+        FOREIGN KEY (`roleId`)
+        REFERENCES `role` (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    CONSTRAINT `resourceIdACLRulFK`
+        FOREIGN KEY (`resourceId`)
+        REFERENCES `acl_resource` (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+) ENGINE InnoDB;
+
