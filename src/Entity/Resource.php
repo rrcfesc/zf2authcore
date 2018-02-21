@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ACL Resource
  * @ORM\Entity
  * @ORM\Table(name="acl_resource")
+ * @ORM\Entity(repositoryClass="Rioxygen\Zf2AuthCore\Repository\ResourceRepository")
  */
 class Resource implements ResourceInterface, BaseEntityInterface
 {

@@ -19,6 +19,11 @@ use Zend\Log\Logger;
 use \DateTime;
 use \Bootstrap;
 
+
+/**
+ * Class to test User
+ * @version 1.0
+ */
 class UserDaoTest extends PHPUnit_Framework_TestCase
 {
     /**

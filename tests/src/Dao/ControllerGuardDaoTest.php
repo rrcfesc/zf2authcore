@@ -16,6 +16,10 @@ use Rioxygen\Zf2AuthCore\Utils\ControllerGuardTruncate;
 use Zend\Log\Logger;
 use \Bootstrap;
 
+/**
+ * Class to test Controller
+ * @version 1.0
+ */
 class ControllerGuardDaoTest extends PHPUnit_Framework_TestCase
 {
     /**

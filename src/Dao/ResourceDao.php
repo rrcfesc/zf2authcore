@@ -93,7 +93,7 @@ class ResourceDao implements DaoInterface
      */
     public function getAll($page = 0, $items = 100, $state = 1) : Paginator
     {
-        $respuesta = $this->repository->getAllRoles($page = 1, $items = 100, $state = 1);
+        $respuesta = $this->repository->getAll($page = 1, $items = 100, $state = 1);
         return $respuesta;
     }
 }

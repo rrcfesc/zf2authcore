@@ -15,7 +15,7 @@ use Rioxygen\Zf2AuthCore\Entity\Role;
  * @ORM\Entity
  * @ORM\Table(name="acl_rule")
  */
-class TortugaRule
+class Rule
 {
 
     /**

@@ -16,6 +16,11 @@ use Zend\Log\Logger;
 use \DateTime;
 use \Bootstrap;
 
+
+/**
+ * Class to test Role
+ * @version 1.0
+ */
 class RoleDaoTest extends PHPUnit_Framework_TestCase
 {
     /**
