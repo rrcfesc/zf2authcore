@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Rioxygen\Zf2AuthCore\Entity\Role;
 use Doctrine\Common\Collections\ArrayCollection;
+use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 
 /**
  * Represent Controller Guard
@@ -17,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="acl_controllerguard")
  * @version 1.0
  */
-class ControllerGuard
+class ControllerGuard implements BaseEntityInterface
 {
     /**
      * @ORM\Id

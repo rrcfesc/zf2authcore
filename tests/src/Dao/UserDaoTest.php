@@ -193,7 +193,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
             $role->setState(1);
             $role->setRoleId("Test");
             $role->setId(10);
-        $infoR              = $roleDao->createRole($role);
+        $infoR              = $roleDao->create($role);
         $this->assertTrue($infoU);
         $this->assertTrue($infoR);
         $user->addRole($role);

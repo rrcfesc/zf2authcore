@@ -22,7 +22,7 @@ class ControllerGuardRepository extends EntityRepository
      * @param boolean $state
      * @return Paginator
      */
-    public function getAllControllerGuardRepository($page = 1, $items = 300) : Paginator
+    public function getAllControllerGuardRepository($page = 0, $items = 300, $state = 1) : Paginator
     {
         $offset = $page * $items;
         $qb = $this->_em->createQueryBuilder();

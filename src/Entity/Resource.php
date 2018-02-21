@@ -7,6 +7,7 @@
 namespace Rioxygen\Zf2AuthCore\Entity;
 
 use Zend\Permissions\Acl\Resource\ResourceInterface;
+use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="acl_resource")
  */
-class Resource implements ResourceInterface
+class Resource implements ResourceInterface, BaseEntityInterface
 {
 
     /**

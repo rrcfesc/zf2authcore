@@ -10,15 +10,16 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Repository\RepositoryFactory;
 use Rioxygen\Zf2AuthCore\Entity\Role;
 use Psr\Log\LoggerInterface;
-#use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Rioxygen\Zf2AuthCore\BaseInterface\DaoInterface;
+use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 use \Exception;
 
 /**
  * RoleDao
  * @version 1.0
  */
-class RoleDao
+class RoleDao implements DaoInterface
 {
     /**
      * @var EntityManager
@@ -45,10 +46,10 @@ class RoleDao
     }
     /**
      * Create or Update Role
-     * @param Role $role
+     * @param BaseEntityInterface $role
      * @return bool
      */
-    public function createRole(Role $role) : bool
+    public function create(BaseEntityInterface $role) : bool
     {
         $control = array(true);
         try {
@@ -68,7 +69,7 @@ class RoleDao
      * @param Role $role
      * @return bool
      */
-    public function deleteRole(Role $role) : bool
+    public function delete(BaseEntityInterface $role) : bool
     {
         $control = array(1);
         try {

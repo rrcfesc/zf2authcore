@@ -74,7 +74,7 @@ class ControllerGuardDaoTest extends PHPUnit_Framework_TestCase
             $controllerG->setId(1);
             $controllerG->setController("Application\\Controller\\Index");
             $controllerG->setAction("Read");
-        $info                       = $controllerGDao->createControllerGuard($controllerG);
+        $info                       = $controllerGDao->create($controllerG);
         $this->assertTrue($info);
         $this->assertControllerGuard($controllerG, true);
     }
@@ -89,7 +89,7 @@ class ControllerGuardDaoTest extends PHPUnit_Framework_TestCase
             $role->setState(1);
             $role->setRoleId("Test");
             $role->setId(10);
-        $roleDao->createRole($role);
+        $roleDao->create($role);
         #create 
         $controllerGDao             = new ControllerGuardDao($this->em, $this->logger);
         $controllerG                = new Entity\ControllerGuard();
@@ -97,14 +97,14 @@ class ControllerGuardDaoTest extends PHPUnit_Framework_TestCase
             $controllerG->setController("Application\\Controller\\Index");
             $controllerG->setAction("Read");
             $controllerG->addRoles($role);
-        $info                       = $controllerGDao->createControllerGuard($controllerG);
+        $info                       = $controllerGDao->create($controllerG);
         $this->assertTrue($info);
         $this->assertControllerGuard($controllerG, true);
         $controllerG->removeRole($role);
-        $infoA                      = $controllerGDao->createControllerGuard($controllerG);
+        $infoA                      = $controllerGDao->create($controllerG);
         $this->assertTrue($infoA);
         $this->assertControllerGuard($controllerG, true);
-        $infoDel                    = $controllerGDao->deleteControllerGuard($controllerG);
+        $infoDel                    = $controllerGDao->delete($controllerG);
         $this->assertTrue($infoDel);
     }
     /**
@@ -118,18 +118,18 @@ class ControllerGuardDaoTest extends PHPUnit_Framework_TestCase
             $role->setState(1);
             $role->setRoleId("Test");
             $role->setId(1000);
-        $roleDao->createRole($role);
+        $roleDao->create($role);
         #create 
         $controllerGDao             = new ControllerGuardDao($this->em, $this->logger);
         $controllerG                = new Entity\ControllerGuard();
             $controllerG->setId(1);
             $controllerG->setController("Application\\Controller\\Index");
             $controllerG->setAction("Read");
-        $info                       = $controllerGDao->createControllerGuard($controllerG);
+        $info                       = $controllerGDao->create($controllerG);
         $this->assertTrue($info);
         $this->assertControllerGuard($controllerG, true);
         $controllerG->removeRole($role);
-        $infoA                      = $controllerGDao->createControllerGuard($controllerG);
+        $infoA                      = $controllerGDao->create($controllerG);
         $this->assertTrue($infoA);
     }
     /**
