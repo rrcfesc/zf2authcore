@@ -6,20 +6,20 @@
  */
 namespace Rioxygen\Zf2AuthCore\Dao;
 
+use Rioxygen\Zf2AuthCore\BaseInterface\DaoInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Repository\RepositoryFactory;
-use Rioxygen\Zf2AuthCore\Entity\Role;
+use Rioxygen\Zf2AuthCore\Entity\Resource;
+use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Rioxygen\Zf2AuthCore\BaseInterface\DaoInterface;
-use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 use \Exception;
 
 /**
- * RoleDao
+ * ResourceDao
  * @version 1.0
  */
-class RoleDao implements DaoInterface
+class ResourceDao implements DaoInterface
 {
     /**
      * @var EntityManager
@@ -42,18 +42,18 @@ class RoleDao implements DaoInterface
     {
         $this->em           = $em;
         $this->logger       = $logger;
-        $this->repository   = $this->em->getRepository('\Rioxygen\Zf2AuthCore\Entity\Role');
+        $this->repository   = $this->em->getRepository('\Rioxygen\Zf2AuthCore\Entity\Resource');
     }
     /**
-     * Create or Update Role
-     * @param BaseEntityInterface $role
+     * Create or Update Resource
+     * @param BaseEntityInterface $resource
      * @return bool
      */
-    public function create(BaseEntityInterface $role) : bool
+    public function create(BaseEntityInterface $resource) : bool
     {
         $control = array(true);
         try {
-            $this->em->persist($role);
+            $this->em->persist($resource);
             $this->em->flush();
             $control[] = true;
         } catch (Exception $ex) {
@@ -65,11 +65,11 @@ class RoleDao implements DaoInterface
         return $respuesta;
     }
     /**
-     * Delete Role Fisical Logical
-     * @param Role $role
+     * Delete Resource Fisical Logical
+     * @param BaseEntityInterface $resource
      * @return bool
      */
-    public function delete(BaseEntityInterface $role) : bool
+    public function delete(BaseEntityInterface $resource) : bool
     {
         $control = array(1);
         try {
@@ -93,7 +93,7 @@ class RoleDao implements DaoInterface
      */
     public function getAll($page = 0, $items = 100, $state = 1) : Paginator
     {
-        $respuesta = $this->repository->getAllRoles($page = 1, $items = 100, $state = 1);
+        $respuesta = $this->repository->getAll($page = 1, $items = 100, $state = 1);
         return $respuesta;
     }
 }

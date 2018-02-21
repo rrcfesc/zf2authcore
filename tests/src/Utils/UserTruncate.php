@@ -13,7 +13,7 @@ namespace Rioxygen\Zf2AuthCore\Utils;
 class UserTruncate extends BaseTruncate
 {
     /**
-     * Return table User
+     * Truncate query table User
      * @return string
      */
     public function userTable() : string

@@ -19,6 +19,11 @@ use Zend\Log\Logger;
 use \DateTime;
 use \Bootstrap;
 
+
+/**
+ * Class to test User
+ * @version 1.0
+ */
 class UserDaoTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -193,7 +198,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
             $role->setState(1);
             $role->setRoleId("Test");
             $role->setId(10);
-        $infoR              = $roleDao->createRole($role);
+        $infoR              = $roleDao->create($role);
         $this->assertTrue($infoU);
         $this->assertTrue($infoR);
         $user->addRole($role);

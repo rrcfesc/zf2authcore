@@ -8,6 +8,7 @@ namespace Rioxygen\Zf2AuthCore\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Permissions\Acl\Role\RoleInterface;
+use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 
 /**
  * An example entity that represents a role.
@@ -16,7 +17,7 @@ use Zend\Permissions\Acl\Role\RoleInterface;
  * @ORM\Entity(repositoryClass="Rioxygen\Zf2AuthCore\Repository\RoleRepository")
  * @author Tom Oram <tom@scl.co.uk>
  */
-class Role implements RoleInterface
+class Role implements RoleInterface, BaseEntityInterface
 {
     /**
      * @var int
