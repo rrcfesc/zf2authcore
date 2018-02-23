@@ -84,6 +84,19 @@ class ResourceDao implements DaoInterface
         return $respuesta;
     }
     /**
+     * {@inheritsDoc}
+     * @param array $params
+     * @return Rule
+     */
+    public function findOneBy(array $params) : Resource
+    {
+        $resource       = $this->repository->findOneBy($params);
+        if (!($resource instanceof Resource)) {
+            $resource =  new Resource();
+        }
+        return $resource;
+    }
+    /**
      * Get All User 
      * @param int $page
      * @param int $items

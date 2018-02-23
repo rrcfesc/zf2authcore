@@ -80,7 +80,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
     {
         $userDao            = new UserDao($this->em, $this->logger);
         $user               = new User();
-        $info               = $userDao->createUser($user);
+        $info               = $userDao->create($user);
         $this->assertTrue(!$info);
         $totalUsuarios      = $userDao->getAll();
         $this->assertCount(0, $totalUsuarios);
@@ -100,7 +100,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
             $user->setPassword("unam2010");
             $user->setState(1);
             $user->setEmail("rrcfesc@gmail.com");
-        $info               = $userDao->createUser($user);
+        $info               = $userDao->create($user);
         $this->assertTrue($info);
         $this->assertUser($user);
         $this->assertTrue(!is_null($user->getId()));
@@ -115,7 +115,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
     public function testDeleteUser($user)
     {
         $userDao            = new UserDao($this->em, $this->logger);
-        $userDao->deleteUser($user);
+        $userDao->delete($user);
         $totalUsuarios      = $userDao->getAll();
         $this->assertTrue((0 === $totalUsuarios->count()));
     }
@@ -134,7 +134,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
             $user->setPassword("unam2010");
             $user->setState(1);
             $user->setEmail("rrcfesc@gmail.com");
-        $info               = $userDao->createUser($user);
+        $info               = $userDao->create($user);
         $this->assertTrue($info);
         $this->assertUser($user);
         $this->assertTrue(!is_null($user->getId()));
@@ -158,7 +158,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
             $userCreate->setPassword("unam2010");
             $userCreate->setState(1);
             $userCreate->setEmail("rrcfesc@gmail.com");
-        $info               = $userDao->createUser($userCreate);
+        $info               = $userDao->create($userCreate);
         $this->assertTrue($info);
         $this->assertUser($userCreate);
         $userSearch         = $userDao->getById($user->getId());
@@ -193,7 +193,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
             $user->setPassword("unam2010");
             $user->setState(1);
             $user->setEmail("rrcfesc@gmail.com");
-        $infoU              = $userDao->createUser($user);
+        $infoU              = $userDao->create($user);
         $role               = new Role();
             $role->setState(1);
             $role->setRoleId("Test");
@@ -202,11 +202,11 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($infoU);
         $this->assertTrue($infoR);
         $user->addRole($role);
-        $userDao->createUser($user);
+        $userDao->create($user);
         $this->assertUser($user);
         $this->assertUserRoles($user, 1);
         $user->removeRole($role);
-        $userDao->createUser($user);
+        $userDao->create($user);
         $this->assertUserRoles($user, 0);
     }
     /**
@@ -216,7 +216,7 @@ class UserDaoTest extends PHPUnit_Framework_TestCase
     {
         $userDao            = new UserDao($this->em, $this->logger);
         $user               = new User();
-        $info               = $userDao->deleteUser($user);
+        $info               = $userDao->delete($user);
         $this->assertTrue(!$info);
     }
     /**

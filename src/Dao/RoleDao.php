@@ -85,6 +85,19 @@ class RoleDao implements DaoInterface
         return $respuesta;
     }
     /**
+     * {@inheritsDoc}
+     * @param array $params
+     * @return Role
+     */
+    public function findOneBy(array $params) : Role
+    {
+        $role       = $this->repository->findOneBy($params);
+        if (!($role instanceof  Role)) {
+            $role =  new Role();
+        }
+        return $role;
+    }
+    /**
      * Get All User 
      * @param int $page
      * @param int $items

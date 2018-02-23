@@ -9,6 +9,7 @@ namespace Rioxygen\Zf2AuthCore\Dao;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Repository\RepositoryFactory;
 use Psr\Log\LoggerInterface;
+use Rioxygen\Zf2AuthCore\Entity\Rule;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Rioxygen\Zf2AuthCore\BaseInterface\DaoInterface;
 use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
@@ -80,6 +81,19 @@ class RuleDao implements DaoInterface
         }
         $respuesta = (bool)(!in_array(0, $control));
         return $respuesta;
+    }
+    /**
+     * {@inheritsDoc}
+     * @param array $params
+     * @return Rule
+     */
+    public function findOneBy(array $params) : Rule
+    {
+        $rule       = $this->repository->findOneBy($params);
+        if (!($rule instanceof Rule)) {
+            $rule =  new Rule();
+        }
+        return $rule;
     }
     /**
      * Get All User 

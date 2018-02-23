@@ -20,5 +20,6 @@ interface DaoInterface
     public function __construct(EntityManager $em, LoggerInterface $logger);
     public function create(BaseEntityInterface $entity);
     public function delete(BaseEntityInterface $entity);
+    public function findOneBy(array $params);
     public function getAll($page = 0, $items = 100, $state = 1) : Paginator;
 }

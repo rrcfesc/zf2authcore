@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ZfcUser\Entity\UserInterface;
+use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 use \DateTime;
 
 /**
@@ -21,7 +22,7 @@ use \DateTime;
  * @ORM\Entity(repositoryClass="Rioxygen\Zf2AuthCore\Repository\UserRepository")
  * @author Tom Oram <tom@scl.co.uk>
  */
-class User implements UserInterface, ProviderInterface
+class User implements BaseEntityInterface, UserInterface, ProviderInterface
 {
     /**
      * @var int

@@ -10,7 +10,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Repository\RepositoryFactory;
 use Rioxygen\Zf2AuthCore\Entity\User;
 use Psr\Log\LoggerInterface;
-#use Doctrine\Common\Collections\ArrayCollection;
+use Rioxygen\Zf2AuthCore\BaseInterface\DaoInterface;
+use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use \Exception;
 
@@ -18,7 +19,7 @@ use \Exception;
  * UserDao
  * @version 1.0
  */
-class UserDao
+class UserDao implements DaoInterface
 {
     /**
      * @var EntityManager
@@ -48,7 +49,7 @@ class UserDao
      * @param User $user
      * @return int
      */
-    public function createUser(User $user) : bool
+    public function create(BaseEntityInterface $user) : bool
     {
         $control = array(true);
         try {
@@ -63,11 +64,11 @@ class UserDao
         return $respuesta;
     }
     /**
-     * DeleteUser Logical
+     * delete Logical
      * @param User $user
      * @return bool
      */
-    public function deleteUser(User $user) : bool
+    public function delete(BaseEntityInterface $user) : bool
     {
         $control = array(1);
         try {
@@ -89,6 +90,19 @@ class UserDao
     public function getById(string $id) : User
     {
         $user       = $this->repository->findOneBy(array('id'=>$id));
+        if (!($user instanceof  User)) {
+            $user =  new User();
+        }
+        return $user;
+    }
+    /**
+     * {@inheritsDoc}
+     * @param array $params
+     * @return User
+     */
+    public function findOneBy(array $params) : User
+    {
+        $user       = $this->repository->findOneBy($params);
         if (!($user instanceof  User)) {
             $user =  new User();
         }
