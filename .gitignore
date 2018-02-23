@@ -36,4 +36,4 @@ vendor
 /vendor/
 vendor/*
 *.code-workspace
-
+ocular.phar

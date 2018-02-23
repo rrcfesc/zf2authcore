@@ -6,20 +6,19 @@
  */
 namespace Rioxygen\Zf2AuthCore\Dao;
 
-use Rioxygen\Zf2AuthCore\BaseInterface\DaoInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Repository\RepositoryFactory;
-use Rioxygen\Zf2AuthCore\Entity\Resource;
-use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Rioxygen\Zf2AuthCore\BaseInterface\DaoInterface;
+use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 use \Exception;
 
 /**
- * ResourceDao
+ * RuleDao
  * @version 1.0
  */
-class ResourceDao implements DaoInterface
+class RuleDao implements DaoInterface
 {
     /**
      * @var EntityManager
@@ -42,22 +41,21 @@ class ResourceDao implements DaoInterface
     {
         $this->em           = $em;
         $this->logger       = $logger;
-        $this->repository   = $this->em->getRepository('\Rioxygen\Zf2AuthCore\Entity\Resource');
+        $this->repository   = $this->em->getRepository('\Rioxygen\Zf2AuthCore\Entity\Rule');
     }
     /**
-     * Create or Update Resource
-     * @param BaseEntityInterface $resource
+     * Determinate if we can create or update Rule
+     * @param BaseEntityInterface $rule
      * @return bool
      */
-    public function create(BaseEntityInterface $resource) : bool
+    public function create(BaseEntityInterface $rule) : bool
     {
         $control = array(true);
         try {
-            $this->em->persist($resource);
+            $this->em->persist($rule);
             $this->em->flush();
             $control[] = true;
         } catch (Exception $ex) {
-            //var_dump($ex->getMessage());
             $this->logger->error($ex->getMessage());
             $control[] = false;
         }
@@ -65,15 +63,15 @@ class ResourceDao implements DaoInterface
         return $respuesta;
     }
     /**
-     * Delete Resource Fisical Logical
-     * @param BaseEntityInterface $resource
-     * @return bool
+     * Delete Rule  Logical
+     * @param BaseEntityInterface $rule
+     * @return type
      */
-    public function delete(BaseEntityInterface $resource) : bool
+    public function delete(BaseEntityInterface $rule)
     {
         $control = array(1);
         try {
-            $this->em->persist($resource);
+            $this->em->persist($rule);
             $this->em->flush();
             $control[] = true;
         } catch (Exception $ex) {
