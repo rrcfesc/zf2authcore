@@ -85,6 +85,19 @@ class ControllerGuardDao implements DaoInterface
         return $respuesta;
     }
     /**
+     * {@inheritsDoc}
+     * @param array $params
+     * @return Rule
+     */
+    public function findOneBy(array $params) : Resource
+    {
+        $controller       = $this->repository->findOneBy($params);
+        if (!($controller instanceof ControllerGuard)) {
+            $controller =  new ControllerGuard();
+        }
+        return $controller;
+    }
+    /**
      * Get All
      * @param int $page
      * @param int $items

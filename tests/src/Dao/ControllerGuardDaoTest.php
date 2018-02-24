@@ -128,13 +128,9 @@ class ControllerGuardDaoTest extends PHPUnit_Framework_TestCase
         $controllerG                = new Entity\ControllerGuard();
             $controllerG->setId(1);
             $controllerG->setController("Application\\Controller\\Index");
-            $controllerG->setAction("Read");
+            $controllerG->setAction(null);
         $info                       = $controllerGDao->create($controllerG);
-        $this->assertTrue($info);
-        $this->assertControllerGuard($controllerG, true);
-        $controllerG->removeRole($role);
-        $infoA                      = $controllerGDao->create($controllerG);
-        $this->assertTrue($infoA);
+        $this->assertTrue(!$info);
     }
     /**
      * Verify information ControllerGuard

@@ -73,8 +73,7 @@ class ResourceDao implements DaoInterface
     {
         $control = array(1);
         try {
-            $role->setState(0);
-            $this->em->persist($role);
+            $this->em->persist($resource);
             $this->em->flush();
             $control[] = true;
         } catch (Exception $ex) {
@@ -83,6 +82,19 @@ class ResourceDao implements DaoInterface
         }
         $respuesta = (bool)(!in_array(0, $control));
         return $respuesta;
+    }
+    /**
+     * {@inheritsDoc}
+     * @param array $params
+     * @return Rule
+     */
+    public function findOneBy(array $params) : Resource
+    {
+        $resource       = $this->repository->findOneBy($params);
+        if (!($resource instanceof Resource)) {
+            $resource =  new Resource();
+        }
+        return $resource;
     }
     /**
      * Get All User 

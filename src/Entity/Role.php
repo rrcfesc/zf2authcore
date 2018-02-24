@@ -8,6 +8,7 @@ namespace Rioxygen\Zf2AuthCore\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Permissions\Acl\Role\RoleInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 
 /**
@@ -38,10 +39,32 @@ class Role implements RoleInterface, BaseEntityInterface
      */
     protected $parent;
     /**
+     * @ORM\ManyToMany(targetEntity="Rioxygen\Zf2AuthCore\Entity\ControllerGuard")
+     * @ORM\JoinTable(name="controllerguard_role_relation",
+     *      joinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="controllerguard_id", referencedColumnName="id")}
+     * )
+     */
+    protected $controllers;
+    /**
      * @var int
      * @ORM\Column(type="integer")
      */
     protected $state;
+    /**
+     * Role constructor.
+     */
+    public function __construct()
+    {
+        $this->controllers = new ArrayCollection();
+    }
+    /**
+     * @return mixed
+     */
+    public function getControllers()
+    {
+        return $this->controllers;
+    }
     /**
      * Get the id.
      *
