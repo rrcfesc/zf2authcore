@@ -68,6 +68,11 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
         $this->logger           = $mocker->getLoggerMock();
         $this->userDao          = new UserDao($this->em, $this->logger);
     }
+
+    /**
+     *
+     * @group UserService
+     */
     public function testGetAll()
     {
         $userService            = new UserService($this->userDao, $this->logger);
@@ -76,6 +81,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     }
     /**
      * Create User
+     * @group UserService
      */
     public function testCreateUser()
     {
@@ -96,6 +102,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     }
     /**
      * Create User
+     * @group UserService
      */
     public function testCreateUserFail()
     {
@@ -106,6 +113,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     }
     /**
      * Create User
+     * @group UserService
      */
     public function testDeleteUser()
     {
@@ -126,6 +134,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     }
     /**
      * Create User
+     * @group UserService
      */
     public function testCreateUserFindById()
     {
@@ -142,6 +151,29 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
         $status                = $userService->create($user);
         $userFind               = $userService->getById(1);
         $this->assertEquals($user, $userFind);
+        $this->assertTrue($status);
+    }
+    /**
+     * Create User
+     * @group UserService
+     */
+    public function testCreateUserFindByIdFail()
+    {
+        $create                 = new DateTime("NOW");
+        $userService            = new UserService($this->userDao, $this->logger);
+        $user                   = new User();
+        $user->setCreate($create);
+        $user->setUpdated($create);
+        $user->setDisplayName("Ricardo Ruiz");
+        $user->setUsername("kasparov");
+        $user->setPassword("unam2010");
+        $user->setState(1);
+        $user->setEmail("rrcfesc@gmail.com");
+        $status                = $userService->create($user);
+        $userFind               = $userService->getById(1000);
+        $userService->delete($userFind);
+        $userFind->setId(1000);
+        //$this->assertEquals($user, $userFind);
         $this->assertTrue($status);
     }
     /**
