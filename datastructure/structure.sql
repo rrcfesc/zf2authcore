@@ -9,7 +9,6 @@ drop table if exists role;
 drop table if exists acl_resource;
 drop table if exists acl_rule;
 
-
 create table if not exists users (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'User Id',
     username varchar(75) COMMENT 'UserName of the customer',
@@ -50,8 +49,8 @@ CREATE TABLE if not exists `users_roles` (
 
 create table if not exists acl_controllerguard(
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identifier',
-    controller varchar(255) COMMENT 'NameSpace of the controller',
-    action varchar(255) COMMENT 'NameSpace of the controller'
+    controller varchar(255) NOT NULL COMMENT 'NameSpace of the controller',
+    action varchar(255) NOT NULL COMMENT 'NameSpace of the controller'
 ) ENGINE InnoDB;
 
 create table if not exists controllerguard_role_relation (
@@ -93,4 +92,3 @@ create table if not exists acl_rule (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 ) ENGINE InnoDB;
-

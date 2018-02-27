@@ -21,6 +21,8 @@ return array(
         ),
     ),
     'service_manager' => array(
-        
+        'factories' => array(
+            'Rioxygen\Zf2AuthCore\Dao\UserDao'      => 'Rioxygen\Zf2AuthCore\Dao\UserDaoFactory'
+        )
     )
 );

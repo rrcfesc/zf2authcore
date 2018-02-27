@@ -1,25 +1,28 @@
 web:
-    image: macmini:latest
+    image: apachephp:7.0
     ports:
         - "80:80"
         - "445:443"
         - "8116:22"
-        - "9000:9000"
     volumes:
         - ./:/var/www/html
         - ~/.ssh:/home/magento2/.ssh
+        - ../apache_vhost:/etc/apache2/sites-available/
     environment:
         - WEBSERVER_USER=www-data
         - MAGENTO_USER=magento2
         - CURRENT_USER_UID=501
         - MAGENTO_GROUP=501
+        - REMOTE_HOST_DEBUG=192.168.1.64
+        - XDEBUG_CONFIG=remote_host=192.168.1.64
+        - PHP_IDE_CONFIG=serverName=localhost
     links:
         - mysql
     container_name: rioxygen-zf2auth-web
 mysql:
     image: mysql:5.7
     ports:
-      - 3307:3306
+      - 3307:33006
     environment:
         - MYSQL_ROOT_PASSWORD=mysql
         - MYSQL_DATABASE=zf2auth

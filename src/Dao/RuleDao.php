@@ -8,18 +8,18 @@ namespace Rioxygen\Zf2AuthCore\Dao;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Repository\RepositoryFactory;
-use Rioxygen\Zf2AuthCore\Entity\User;
 use Psr\Log\LoggerInterface;
+use Rioxygen\Zf2AuthCore\Entity\Rule;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Rioxygen\Zf2AuthCore\BaseInterface\DaoInterface;
 use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use \Exception;
 
 /**
- * UserDao
+ * RuleDao
  * @version 1.0
  */
-class UserDao implements DaoInterface
+class RuleDao implements DaoInterface
 {
     /**
      * @var EntityManager
@@ -42,18 +42,18 @@ class UserDao implements DaoInterface
     {
         $this->em           = $em;
         $this->logger       = $logger;
-        $this->repository   = $this->em->getRepository('\Rioxygen\Zf2AuthCore\Entity\User');
+        $this->repository   = $this->em->getRepository('\Rioxygen\Zf2AuthCore\Entity\Rule');
     }
     /**
-     * Determinate if we can create or update User
-     * @param User $user
-     * @return int
+     * Determinate if we can create or update Rule
+     * @param BaseEntityInterface $rule
+     * @return bool
      */
-    public function create(BaseEntityInterface $user) : bool
+    public function create(BaseEntityInterface $rule) : bool
     {
         $control = array(true);
         try {
-            $this->em->persist($user);
+            $this->em->persist($rule);
             $this->em->flush();
             $control[] = true;
         } catch (Exception $ex) {
@@ -64,16 +64,15 @@ class UserDao implements DaoInterface
         return $respuesta;
     }
     /**
-     * delete Logical
-     * @param User $user
-     * @return bool
+     * Delete Rule  Logical
+     * @param BaseEntityInterface $rule
+     * @return type
      */
-    public function delete(BaseEntityInterface $user) : bool
+    public function delete(BaseEntityInterface $rule)
     {
         $control = array(1);
         try {
-            $user->setState(0);
-            $this->em->persist($user);
+            $this->em->persist($rule);
             $this->em->flush();
             $control[] = true;
         } catch (Exception $ex) {
@@ -82,31 +81,19 @@ class UserDao implements DaoInterface
         }
         $respuesta = (bool)(!in_array(0, $control));
         return $respuesta;
-    }
-    /**
-     * Get By User Id
-     * @param string $id
-     */
-    public function getById(string $id) : User
-    {
-        $user       = $this->repository->findOneBy(array('id'=>$id));
-        if (!($user instanceof  User)) {
-            $user =  new User();
-        }
-        return $user;
     }
     /**
      * {@inheritsDoc}
      * @param array $params
-     * @return User
+     * @return Rule
      */
-    public function findOneBy(array $params) : User
+    public function findOneBy(array $params) : Rule
     {
-        $user       = $this->repository->findOneBy($params);
-        if (!($user instanceof  User)) {
-            $user =  new User();
+        $rule       = $this->repository->findOneBy($params);
+        if (!($rule instanceof Rule)) {
+            $rule =  new Rule();
         }
-        return $user;
+        return $rule;
     }
     /**
      * Get All User 
@@ -117,7 +104,7 @@ class UserDao implements DaoInterface
      */
     public function getAll($page = 0, $items = 100, $state = 1) : Paginator
     {
-        $respuesta = $this->repository->getAllUsers($page = 1, $items = 100, $state = 1);
+        $respuesta = $this->repository->getAll($page = 1, $items = 100, $state = 1);
         return $respuesta;
     }
 }

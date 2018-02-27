@@ -9,15 +9,16 @@ namespace Rioxygen\Zf2AuthCore\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Rioxygen\Zf2AuthCore\Entity\Resource;
 use Rioxygen\Zf2AuthCore\Entity\Role;
+use Rioxygen\Zf2AuthCore\BaseInterface\BaseEntityInterface;
 
 /**
  * ACL Resource Rule
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Rioxygen\Zf2AuthCore\Repository\RuleRepository")
  * @ORM\Table(name="acl_rule")
  */
-class Rule
+class Rule implements BaseEntityInterface
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -26,12 +27,12 @@ class Rule
     private $id;
     /**
      * @ORM\ManyToOne(targetEntity="Rioxygen\Zf2AuthCore\Entity\Resource")
-     * @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="resourceId", referencedColumnName="id")
      */
     private $resource;
     /**
      * @ORM\ManyToOne(targetEntity="Rioxygen\Zf2AuthCore\Entity\Role")
-     * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="roleId", referencedColumnName="id")
      */
     private $role;
     /**
@@ -61,7 +62,6 @@ class Rule
     public function setResource(Resource $resource)
     {
         $this->resource = $resource;
-
     }
     /**
      * Get attribute

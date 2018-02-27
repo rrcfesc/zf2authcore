@@ -36,7 +36,7 @@ class RoleDaoTest extends PHPUnit_Framework_TestCase
      */
     private $logger;
     /**
-     * @var UserTruncate
+     * @var RoleTruncate
      */
     private $truncate;
     /**
@@ -162,6 +162,8 @@ class RoleDaoTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($role->getId());
         $this->assertNotNull($role->getRoleId());
         $this->assertNotNull($role->getState());
+        $info = $role->getControllers();
+        $this->assertTrue(is_object($info));
         if ($evalueteParent) {
             $this->assertNotNull($role->getParent());
         } else {
