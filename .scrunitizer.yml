@@ -1,20 +1,14 @@
 imports:
   - php
-checks:
-    php: true
-filter:
-    excluded_paths:
-        - tests/*
-        - vendor/*
 before_commands:
   - "composer install --dev"
 tools:
-  external_code_coverage: true
+  external_code_coverage: false
 tools:
     php_cs_fixer:
         config: { level: psr4 }
 checks:
-    php: 
+    php:
         verify_property_names: true
         verify_argument_usable_as_reference: true
         verify_access_scope_valid: true
@@ -66,15 +60,15 @@ checks:
         no_trait_type_hints: true
         no_trailing_whitespace: true
         no_short_variable_names:
-            minimum: '4'
+            minimum: '3'
         no_short_open_tag: true
         no_short_method_names:
-            minimum: '4'
+            minimum: '3'
         no_property_on_interface: true
         no_non_implemented_abstract_methods: true
         no_new_line_at_end_of_file: false
         no_long_variable_names:
-            maximum: '30'
+            maximum: '20'
         no_goto: true
         no_global_keyword: true
         no_exit: true
