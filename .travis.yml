@@ -9,6 +9,9 @@ mysql:
   database: zf2auth
   username: root
   encoding: utf8
+install:
+  - pear channel-update pear.php.net
+  - pear install PHP_CodeSniffer
 script:
   - php vendor/bin/phpunit -c phpunit.xml  
 after_script:
